@@ -27,7 +27,6 @@ const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 //contentSecurityPolicy this allows us to specify like only images from unsplash will be allowed to work it lets us define which resources are to be
 //used for our web-application like we are only allowed to use fonts from google fonts, etc.,
 
-// mongoose.connect(dbUrl);
 mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
