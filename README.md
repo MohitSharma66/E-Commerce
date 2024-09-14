@@ -17,13 +17,13 @@ https://e-commerce-k6o6.onrender.com
 
 ## Home Page
 ![image](https://github.com/user-attachments/assets/256b5e83-d129-46f4-9879-e37f84f1e82f)
-##Login Page
+## Login Page
 ![image](https://github.com/user-attachments/assets/543d5585-4399-42cb-84bd-b0174789108c)
-##Product Page
+## Product Page
 ![image](https://github.com/user-attachments/assets/6f9561df-997e-491b-9840-bf517fdd13ba)
-##User Profile Page
+## User Profile Page
 ![image](https://github.com/user-attachments/assets/85bfa5fc-e903-4824-bbd9-95863f297aad)
-##Cart Page
+## Cart Page
 ![image](https://github.com/user-attachments/assets/56aa6e2f-1dea-4293-b8f5-72e303337b41)
 
 ## Technologies Used
@@ -114,4 +114,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For any questions or issues, please contact [your-email@example.com](mailto:mohits9168@gmail.com).
+For any questions or issues, please contact [mohits9168@gmail.com](mailto:mohits9168@gmail.com).
