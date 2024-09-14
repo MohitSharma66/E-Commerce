@@ -5,7 +5,7 @@
 This is a full-stack e-commerce web application built with Node.js, Express, MongoDB, and integrates with Cloudinary for image management. The application allows users to view products, add them to their cart, and manage their profiles.
 
 ## Deployement Link
-https://e-commerce-k6o6.onrender.com/products/66e586444b80665c76b1fcfd
+https://e-commerce-k6o6.onrender.com
 
 ## Features
 
@@ -14,6 +14,17 @@ https://e-commerce-k6o6.onrender.com/products/66e586444b80665c76b1fcfd
 - **Cart Functionality**: Add products to the cart and view the cart.
 - **Image Management**: Upload and manage product images using Cloudinary.
 - **Responsive Design**: Built with Bootstrap for a responsive and modern user interface.
+
+## Home Page
+![image](https://github.com/user-attachments/assets/256b5e83-d129-46f4-9879-e37f84f1e82f)
+##Login Page
+![image](https://github.com/user-attachments/assets/543d5585-4399-42cb-84bd-b0174789108c)
+##Product Page
+![image](https://github.com/user-attachments/assets/6f9561df-997e-491b-9840-bf517fdd13ba)
+##User Profile Page
+![image](https://github.com/user-attachments/assets/85bfa5fc-e903-4824-bbd9-95863f297aad)
+##Cart Page
+![image](https://github.com/user-attachments/assets/56aa6e2f-1dea-4293-b8f5-72e303337b41)
 
 ## Technologies Used
 
