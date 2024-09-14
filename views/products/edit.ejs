@@ -1,27 +1,27 @@
-<%- layout('layouts/boilerplate.ejs') %> <!--All this below is passed as body in boilerplate.ejs-->
+<%- layout('layouts/boilerplate.ejs') %> <!-- All this below is passed as body in boilerplate.ejs -->
 <div class="row">
-    <h1 class="text-center">Edit Campground</h1>
+    <h1 class="text-center">Edit Product</h1>
     <div class="col-6 offset-3">
-        <form method="POST" action="/campgrounds/<%= campground._id %>?_method=PUT" novalidate enctype="multipart/form-data" class="validated-form">
+        <form method="POST" action="/products/<%= product._id %>?_method=PUT" novalidate enctype="multipart/form-data" class="validated-form">
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" id="title" type="text" name="campground[title]" value="<%= campground.title %>" required>
+                <input class="form-control" id="title" type="text" name="product[title]" value="<%= product.title %>" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
-            </div>          <!--Value is different from placeholder-->
+            </div>          <!-- Value is different from placeholder -->
             <div class="mb-3">
                 <label class="form-label" for="location">Location</label>
-                <input class="form-control" id="location" type="text" name="campground[location]" value="<%= campground.location %>"  required>
+                <input class="form-control" id="location" type="text" name="product[location]" value="<%= product.location %>" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
             <div class="mb-3">
-                <label class="form-label" for="price">Campground Price</label>
+                <label class="form-label" for="price">Product Price</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="price">$</span>
-                    <input type="number" id="price" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="price" name="campground[price]" value="<%= campground.price %>"  required>
+                    <input type="number" id="price" class="form-control" placeholder="0.0" aria-label="Username" aria-describedby="price" name="product[price]" value="<%= product.price %>" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -29,7 +29,7 @@
             </div>         
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" id="description" type="text" name="campground[description]"  required><%= campground.description %></textarea>
+                <textarea class="form-control" id="description" type="text" name="product[description]" required><%= product.description %></textarea>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
@@ -41,20 +41,20 @@
                 <input type="file" class="form-control" name="image" id="image" multiple>
             </div>
             <div class="mb-3">
-                <% campground.images.forEach(function(img, i) { %>
+                <% product.images.forEach(function(img, i) { %>
                     <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
                     <div class="form-check-inline">
                         <input type="checkbox" id="image-<%= i %>" name="deleteImages[]" value="<%= img.filename %>">
-                        <!--The value of any checkbox that was checked is stored in deleteImages array-->
-                        <!--This deleteImages array is stored in req.body as req.body.deleteImages-->
+                        <!-- The value of any checkbox that was checked is stored in deleteImages array -->
+                        <!-- This deleteImages array is stored in req.body as req.body.deleteImages -->
                     </div>
                     <label for="image-<%= i %>">Delete?</label>
                 <% }) %>
             </div>
             <div class="mb-3">
-                <button class="btn btn-info">Update Campground</button>
+                <button class="btn btn-info">Update Product</button>
             </div>
         </form>
-        <a href="/campgrounds/<%= campground._id %>">Back to Campground</a>
+        <a href="/products/<%= product._id %>">Back to Product</a>
     </div>
 </div>

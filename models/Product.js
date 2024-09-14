@@ -17,21 +17,9 @@ ImageSchema.virtual('thumbnail').get(function() {
 //we do this because we don't want to store a new modified url in the database again, we don't request them again from Cloudinary
 //this defines a property known as thumbnail on images can be accesses by campground.images.thumbnail
 
-const CampgroundSchema = new Schema({
+const ProductSchema = new Schema({
     title: String,
     images: [ImageSchema],
-    geometry: {
-        type: {
-            type: String,
-            enum: ['Point'],
-            required: true
-        },
-        coordinates: {
-            type: [Number], //this signifies that coordinates is an array of numbers coordinates itself is singular but it contains [x, y] thus 
-            //type: [Number] and coordinates is not an array itself i.e., its coordinates: {} not coordinates: [{}]
-            required: true
-        }
-    },
     price: Number,
     description: String,
     location: String,
@@ -48,15 +36,9 @@ const CampgroundSchema = new Schema({
 }, { toJSON: { virtuals: true }, toObject: { virtuals: true } }); //we pass this toJSON true to include the virtual functions in the campground Schema
 //like the location field thing we want to include properties like that
 
-CampgroundSchema.virtual('properties.popUpMarkup').get(function() {
-    return `
-    <strong><a href="/campgrounds/${this._id}">${this.title}</a></strong>
-    <p>${this.description.substring(0, 20)}...</p>`;
-})
-
 // findByIdAndDelete calls this findOneAndDelete Middleware so we use this again refer to mongoose docs
 //This is a query middleware which passes doc if it finds it refer to mongoose docs
-CampgroundSchema.post('findOneAndDelete', async function (doc) { 
+ProductSchema.post('findOneAndDelete', async function (doc) { 
     if (doc) {
         await Review.deleteMany({
             _id: {
@@ -66,4 +48,4 @@ CampgroundSchema.post('findOneAndDelete', async function (doc) {
     }
 });
 
-module.exports = mongoose.model('Campground', CampgroundSchema);
+module.exports = mongoose.model('Product', ProductSchema);

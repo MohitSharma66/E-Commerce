@@ -1,0 +1,41 @@
+<%- layout('layouts/boilerplate.ejs') %>
+<div class="container">
+    <% let count = 0; %>
+    <% for(let product of products) { %>
+        <% if (count % 2 === 0) { %>
+            <div class="row mb-4">
+        <% } %>
+        
+        <div class="col-md-6 col-lg-6 col-xl-6">
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <% if (product.images && product.images.length > 0) { %>
+                            <img crossorigin="anonymous" src="<%= product.images[0].url %>" alt="" class="img-fluid">
+                        <% } else { %>
+                            <img crossorigin="anonymous" src="https://via.placeholder.com/400" alt="No image available" class="img-fluid">
+                        <% } %>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= product.title %></h5>
+                            <p class="card-text"><%= product.description %></p>
+                            <p class="card-text">
+                                <small class="text-muted"><%= product.location %></small>
+                            </p>
+                            <p class="card-text">
+                                <strong>$<%= product.price.toFixed(2) %></strong>
+                            </p>
+                            <a href="/products/<%= product._id %>" class="btn btn-primary">View <%= product.title %></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% count++; %>
+        <% if (count % 2 === 0 || count === products.length) { %>
+            </div>
+        <% } %>
+    <% } %>
+</div>

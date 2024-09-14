@@ -20,6 +20,8 @@ router.route('/login')
 //middleware runs between req and res and after response the session is cleared thus we store it in res.locals and then 
 //res.locals.returnTo is overwritten every time a new value is stored
 
+router.get('/cart', users.showCart);
+
 router.get('/logout', users.logout);
 
 module.exports = router;

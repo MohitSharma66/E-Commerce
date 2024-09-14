@@ -1,75 +1,69 @@
-const { campgroundSchema } = require('./schemas');
+const { productSchema } = require('./schemas');
 const ExpressError = require('./utils/ExpressError');
-const Campground = require('./models/campground');
-const { reviewSchema } = require('./schemas'); 
+const Product = require('./models/Product'); // Updated to Product
+const { reviewSchema } = require('./schemas');
 const Review = require('./models/review');
 
+// Store the returnTo URL in the locals for redirecting after login
 module.exports.storeReturnTo = (req, res, next) => {
     if (req.session.returnTo) {
         res.locals.returnTo = req.session.returnTo;
     }
-    next(); //we store the returnTo in the locals as when a session is cleared whenever we visit a new page
-};
+    next();
+}
 
+// Check if the user is logged in
 module.exports.isLoggedIn = (req, res, next) => {
-    //req.user stores information of the user passport gives us this functionality, it contains deserialized information of the user
-    //session has serialized information of the user
-    //It contains the id, username and the email of the user
-    if(!req.isAuthenticated()) {
-        //the url when the user fails authentication is stored as after the user is verified that's where we want to redirect the user
+    if (!req.isAuthenticated()) {
         req.session.returnTo = req.originalUrl;
-        req.flash('error', 'You Must Be Signed In!')
-        return res.redirect('/login'); //we return this otherwise the code below also runs
+        req.flash('error', 'You Must Be Signed In!');
+        return res.redirect('/login');
     }
     next();
 }
 
-//Validation happens between req and res thus we make a middleware functions and add it to certain route handlers
-module.exports.validateCampground = (req, res, next) => { //A middleware function has req, res and next
-    //campgroundSchema in schemas.js
-    const { error } = campgroundSchema.validate(req.body);
-    if(error) {
-        const msg = error.details.map(el => el.message).join(',')
+// Validate the product data
+module.exports.validateProduct = (req, res, next) => { 
+    const { error } = productSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
         throw new ExpressError(msg, 400);
     }
-    else {
-        next();
-    }
+    next();
 }
 
+// Check if the user is the author of the product
 module.exports.isAuthor = async (req, res, next) => {
     const { id } = req.params;
-    const camp = await Campground.findById(id);
-    if (!camp) {
-        req.flash('error', 'Campground not found!');
-        return res.redirect('/campgrounds');
+    const product = await Product.findById(id);
+    if (!product) {
+        req.flash('error', 'Product not found!');
+        return res.redirect('/products'); // Updated to products
     }
-    if (!camp.author.equals(req.user._id)) {
+    if (!product.author.equals(req.user._id)) {
         req.flash('error', 'You do not have permission to do that!');
-        return res.redirect(`/campgrounds/${id}`);
+        return res.redirect(`/products/${id}`); // Updated to products
     }
     next();
 }
 
-
-
+// Validate review data
 module.exports.validateReview = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body);
-    if(error) {
-        const msg = error.details.map(el => el.message).join(',')
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',');
         throw new ExpressError(msg, 400);
     }
-    else {
-        next();
-    }
+    next();
 }
 
+// Check if the user is the author of the review
 module.exports.isReviewAuthor = async (req, res, next) => {
     const { id, reviewId } = req.params;
     const review = await Review.findById(reviewId);
-    if(!review.author.equals(req.user._id)) {
+    if (!review.author.equals(req.user._id)) {
         req.flash('error', 'You do not have permission to do that!');
-        return res.redirect(`/campgrounds/${id}`);
+        return res.redirect(`/products/${id}`); // Updated to products
     }
     next();
 }

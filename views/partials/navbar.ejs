@@ -1,24 +1,25 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">YelpCamp</a>
+  <div class="container-fluid">
+      <a class="navbar-brand" href="#">E-Commerce</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="/">Home</a>
-          <a class="nav-link" href="/campgrounds">Campgrounds</a>
-          <a class="nav-link" href="/campgrounds/new">New Campground</a>
-        </div>
-        <div class="navbar-nav ml-auto">
-          <% if(!currentUser) { %>
-            <a class="nav-link" href="/login">Log In!</a>
-            <a class="nav-link" href="/register">Register!</a>
-          <% } else { %>
-            <a class="nav-link" href="/logout">Logout!</a>
-            <a class="nav-link" href="/profile/<%= currentUser._id %>">Profile!</a>
-          <% } %>
-        </div>
+          <div class="navbar-nav">
+              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="/products">Products</a>
+              <a class="nav-link" href="/products/new">Post a new Product</a>
+          </div>
+          <div class="navbar-nav ml-auto">
+              <% if(!currentUser) { %>
+                  <a class="nav-link" href="/login">Log In!</a>
+                  <a class="nav-link" href="/register">Register!</a>
+              <% } else { %>
+                  <a class="nav-link" href="/logout">Logout!</a>
+                  <a class="nav-link" href="/profile/<%= currentUser._id %>">Profile!</a>
+                  <a class="nav-link" href="/cart">View Cart</a>
+              <% } %>
+          </div>
       </div>
-    </div>
-  </nav>
+  </div>
+</nav>

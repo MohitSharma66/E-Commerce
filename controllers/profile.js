@@ -5,7 +5,7 @@ module.exports.showProfile = async (req, res) => {
     const { id } = req.params;
     const user = await User.findById(id)
         .populate({
-            path: 'campgrounds',
+            path: 'products', // Changed from 'campgrounds' to 'products'
             populate: {
                 path: 'author'
             }
@@ -13,8 +13,8 @@ module.exports.showProfile = async (req, res) => {
         .populate({
             path: 'reviews',
             populate: {
-                path: 'campground',
-                model: 'Campground'
+                path: 'product', // Changed from 'campground' to 'product'
+                model: 'Product'
             }
         });
     res.render('profile/show', { user });
@@ -31,13 +31,13 @@ module.exports.updateProfile = async (req, res) => {
     const user = await User.findByIdAndUpdate(id, req.body, { new: true }); // `req.body` instead of `req.body.user`
     if (req.file) {
         if (user.image && user.image.filename) {
-            await cloudinary.uploader.destroy(user.image.filename); //if there is already a profile image and user tries to update it, we delete the existing profile image
+            await cloudinary.uploader.destroy(user.image.filename); // Delete the existing profile image if updating
         }
-        user.image = { url: req.file.path, filename: req.file.filename }; //no need to push images as there is no array
+        user.image = { url: req.file.path, filename: req.file.filename }; // Update the profile image
     }
     if(user.deleteImage && user.deleteImage.filename) {
         await cloudinary.uploader.destroy(user.deleteImage.filename);
-        user.deleteImage = undefined; //delete the deleteImage field from the user document after deleting the image from cloudinary
+        user.deleteImage = undefined; // Remove the deleteImage field
         await user.updateOne({image: null});
     }
     await user.save();

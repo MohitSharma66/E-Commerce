@@ -8,9 +8,9 @@ const reviewSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    campground: { //not an array a particulart review can only be associated with one campground
+    product: { //not an array a particulart review can only be associated with one campground
         type: Schema.Types.ObjectId, //Please make sure to push campground after creating a review
-        ref: 'Campground'
+        ref: 'Product'
     }
 })
 

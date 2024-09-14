@@ -31,13 +31,13 @@
                 <p><em>You have not provided any information about yourself yet.</em></p>
             <% } %>
 
-            <h3>Your Campgrounds</h3>
-            <% if(Array.isArray(user.campgrounds) && user.campgrounds.length === 0) { %>
-                <p><em>You have not created any campgrounds yet.</em></p>
-            <% } else if(Array.isArray(user.campgrounds)) { %>
+            <h3>Your Products</h3>
+            <% if(Array.isArray(user.products) && user.products.length === 0) { %>
+                <p><em>You have not created any products yet.</em></p>
+            <% } else if(Array.isArray(user.products)) { %>
                 <ul class="list-group">
-                    <% user.campgrounds.forEach(campground => { %>
-                        <li class="list-group-item"><a href="/campgrounds/<%= campground._id %>"><%= campground.title %></a></li>
+                    <% user.products.forEach(product => { %>
+                        <li class="list-group-item"><a href="/products/<%= product._id %>"><%= product.title %></a></li>
                     <% }); %>
                 </ul>
             <% } %>
@@ -48,10 +48,10 @@
             <% } else if(Array.isArray(user.reviews)) { %>
                 <ul class="list-group">
                     <% user.reviews.forEach(review => { %>
-                        <% if (review.campground) { %>
-                            <li class="list-group-item"><a href="/campgrounds/<%= review.campground._id %>"><%= review.body %></a></li>
+                        <% if (review.product) { %>
+                            <li class="list-group-item"><a href="/products/<%= review.product._id %>"><%= review.body %></a></li>
                         <% } else { %>
-                            <li class="list-group-item"><a href="/campgrounds/66af795dc9d21a19daa7680b"><%= review.body %></a></li>
+                            <li class="list-group-item"><a href="/products/66af795dc9d21a19daa7680b"><%= review.body %></a></li>
                         <% } %>
                     <% }); %>
                 </ul>

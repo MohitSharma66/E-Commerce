@@ -19,10 +19,16 @@ const userSchema = new Schema({
         url: String,
         filename: String
     },
-    campgrounds: [
+    products: [
         {
             type: Schema.Types.ObjectId,  //we need to push the campgrounds into the user where new campgrounds are being created
-            ref: 'Campground'
+            ref: 'Product'
+        }
+    ],
+    cart : [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Product'
         }
     ],
     reviews: [

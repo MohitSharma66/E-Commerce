@@ -1,30 +1,27 @@
 const Review = require('../models/review');
 const User = require('../models/user');
-const Campground = require('../models/campground');
+const Product = require('../models/Product'); // Updated from Campground to Product
 
-module.exports.createReview = async(req, res) => {
+module.exports.createReview = async (req, res) => {
     const { id } = req.params;
     const review = new Review(req.body.review);
     review.author = req.user._id;
-    const campground = await Campground.findById(id);
-    campground.reviews.push(review); //We push review not just its id
-    review.campground = id; //don't .push campground as campground field in the review model is not an array
-    //review.campground is a objectId thus we equate it with the campground id
+    const product = await Product.findById(id); // Changed from Campground to Product
+    product.reviews.push(review); // Push review to the product's reviews array
+    review.product = id; // Associate review with product
     await review.save();
-    await campground.save();
+    await product.save();
     const user = await User.findById(req.user._id);
     user.reviews.push(review._id);
     await user.save();
     req.flash('success', 'Created new review!');
-    res.redirect(`/campgrounds/${id}`);
+    res.redirect(`/products/${id}`); // Updated redirect to /products
 }
 
-module.exports.deleteReview = async (req, res) => { //we also have campground id here to delete the reference of the deleted review to the campground
+module.exports.deleteReview = async (req, res) => {
     const { id, reviewId } = req.params;
-    //Just google how to delete an item from an array in mongoose and you will find the pull method
-    await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId}}) //with pull we can delete an array based
-    //on a condition from a bigger array
+    await Product.findByIdAndUpdate(id, { $pull: { reviews: reviewId } }); // Remove review reference from the product
     await Review.findByIdAndDelete(reviewId);
     req.flash('success', 'Successfully deleted review!');
-    res.redirect(`/campgrounds/${id}`);
+    res.redirect(`/products/${id}`); // Updated redirect to /products
 }
